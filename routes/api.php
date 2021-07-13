@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\IndexController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/', [IndexController::class, 'index']);
+Route::post('/', [HomeController::class, 'index']);

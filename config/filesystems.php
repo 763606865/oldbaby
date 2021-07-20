@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'qingstor'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,6 +51,35 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+        ],
+
+        'admin' => [
+            'driver' => 'local',
+            'root' => storage_path('uploads'),
+            'url' => env('APP_URL').'/uploads',
+            'visibility' => 'public',
+        ],
+
+        'qingstor' => [
+            'driver' => 'QingStor',
+            'bucket' => env('QINGYUN_BUCKET','oldbaby'),
+            'zone' => env('QINGYUN_ZONE','pek3a'),
+            'access_key_id' => env('QINGYUN_ACCESS_KEY',''), // 青云App Key
+            'secret_access_key' => env('QINGYUN_ACCESS_SECRET',''), //青云App Secret
+            'url' => env('QINGYUN_URL', 'http://oldbaby.pek3b.qingstor.com'),
+        ],
+
+        'oss' => [
+            'driver'        => 'oss',
+            'access_id'     => env('ALIYUN_ACCESS_KEY',''),
+            'access_key'    => env('ALIYUN_ACCESS_SECRET',''),
+            'bucket'        => env('ALIYUN_BUCKET','oldbaby'),
+            'endpoint'      => env('ALIYUN_WEB_POINT','oss-cn-beijing.aliyuncs.com'), // OSS 外网节点或自定义外部域名
+            //'endpoint_internal' => '<internal endpoint [OSS内网节点] 如：oss-cn-shenzhen-internal.aliyuncs.com>', // v2.0.4 新增配置属性，如果为空，则默认使用 endpoint 配置(由于内网上传有点小问题未解决，请大家暂时不要使用内网节点上传，正在与阿里技术沟通中)
+            'cdnDomain'     => env('ALIYUN_CDN_DOMAIN', 'oldbaby.oss-accelerate.aliyuncs.com'), // 如果isCName为true, getUrl会判断cdnDomain是否设定来决定返回的url，如果cdnDomain未设置，则使用endpoint来生成url，否则使用cdn
+            'ssl'           => false, // true to use 'https://' and false to use 'http://'. default is false,
+            'isCName'       => false, // 是否使用自定义域名,true: 则Storage.url()会使用自定义的cdn或域名生成文件url， false: 则使用外部节点生成url
+            'debug'         => false
         ],
 
     ],

@@ -6,12 +6,17 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "codingyu/laravel-ueditor": "~2.0",
+        "codingyu/ueditor": "^3.0",
         "encore/laravel-admin": "^1.8",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "gexingw/laravel-qingstor-storage": "^0.0.4",
+        "guzzlehttp/guzzle": "^6.3.0",
+        "jacobcyl/ali-oss-storage": "^2.1",
         "laravel/framework": "^8.40",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "yunify/qingstor-sdk": "^2.2.6"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

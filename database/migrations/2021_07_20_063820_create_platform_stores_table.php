@@ -18,6 +18,11 @@ class CreatePlatformStoresTable extends Migration
             $table->integer('store_id');
             $table->integer('platform_id');
             $table->string('link',256);
+            $table->decimal('price',12,2);
+            $table->decimal('origin_price',12,2);
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

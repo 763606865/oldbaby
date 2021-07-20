@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Store\Platform;
 use App\Admin\Actions\Store\Tags;
 use App\Models\Store;
 use Encore\Admin\Actions\Action;
@@ -43,8 +44,11 @@ class StoreController extends AdminController
         });
 
         $grid->actions(function ($actions) {
-            // append一个作
+            // 绑定标签
             $actions->add(new Tags);
+
+            // 绑定平台
+            $actions->add(new Platform);
         });
 
         return $grid;

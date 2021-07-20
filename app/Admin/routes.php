@@ -15,4 +15,5 @@ Route::group([
     $router->resource('banners', BannerController::class);
     $router->resource('stores', StoreController::class);
     $router->resource('tags', TagController::class);
+    $router->resource('platforms', PlatformController::class);
 });

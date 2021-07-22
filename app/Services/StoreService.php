@@ -31,7 +31,18 @@ class StoreService
             $query = $query->orderBy(array_keys($order)[0],array_values($order)[0]);
         }
 
-        $paginate = $query->paginate($perPage, ['*'], 'page', $page);
+        $paginate = $query->paginate($perPage, ['*'], 'page', $page)->toArray();
+
+        $paginate['data'] = collect($paginate['data'])->map(function ($item){
+            $tag_ids = StoreTags::query()->where('store_id',$item['id'])->pluck('tag_id');
+            $tags = [];
+            foreach($tag_ids as $tag_id)
+            {
+                $tags[] = Tag::query()->where('id',$tag_id)->first()->toArray();
+            }
+            $item['tags'] = $tags;
+            return $item;
+        })->toArray();
 
         return $paginate;
     }

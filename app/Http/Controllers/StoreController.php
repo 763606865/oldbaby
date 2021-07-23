@@ -20,7 +20,7 @@ class StoreController extends Controller
         ]]);
     }
 
-    public function detail($store_id,Request $request)
+    public function detail($store_id)
     {
         $store = StoreService::getInstance()->detail($store_id);
 

@@ -1,9 +1,13 @@
 <?php
 namespace App\Services;
 
+use App\Models\Platform;
+use App\Models\PlatformStore;
 use App\Models\Store;
+use App\Models\StoreAlbum;
 use App\Models\StoreTags;
 use App\Models\Tag;
+use Carbon\Carbon;
 
 class StoreService
 {
@@ -47,4 +51,42 @@ class StoreService
         return $paginate;
     }
 
+    public function albumBatch(int $store_id,array $albums=[])
+    {
+        if(!empty($albums))
+        {
+            $inserts = [];
+            collect($albums)->each(function($album) use($store_id,&$inserts){
+                $inserts[] = [
+                    'store_id' => $store_id,
+                    'thumb' => $album,
+                    'created_at' => Carbon::now()->toDateTimeString(),
+                    'updated_at' => Carbon::now()->toDateTimeString(),
+                ];
+            });
+            StoreAlbum::query()->insert($inserts);
+        }
+    }
+
+    public function detail(int $store_id)
+    {
+
+        $info = Store::query()->where('id',$store_id)->first()->toArray();
+
+        $platforms = PlatformStore::query()->where('store_id',$store_id)->get()->map(function ($item){
+            $platform = Platform::query()->where('id',$item->platform_id)->first();
+            $item['platform_name'] = $platform->name;
+            $item['platform_mark'] = $platform->mark;
+            return $item;
+        })->toArray();
+
+        $albums = StoreAlbum::query()->where('store_id', $store_id)->get()->toArray();
+
+        $data = [
+            'info'      => $info,
+            'platforms' => $platforms,
+            'albums'    => $albums,
+        ];
+        return $data;
+    }
 }

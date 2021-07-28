@@ -69,7 +69,7 @@ class StoreAlbumController extends AdminController
         $form = new Form(new StoreAlbum());
 
         $form->number('store_id', __('Store id'));
-        $form->image('thumb', __('Thumb'))->dir('/images');
+        $form->image('thumb', __('Thumb'))->dir('/images')->help('尺寸');
 
         return $form;
     }

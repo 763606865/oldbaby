@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/', [HomeController::class, 'index']);
 Route::post('/stores', [StoreController::class, 'index']);
+Route::post('/stores/{store_id}', [StoreController::class, 'detail']);

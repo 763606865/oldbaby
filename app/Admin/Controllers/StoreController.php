@@ -2,10 +2,10 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Store\Album;
 use App\Admin\Actions\Store\Platform;
 use App\Admin\Actions\Store\Tags;
 use App\Models\Store;
-use Encore\Admin\Actions\Action;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -49,6 +49,9 @@ class StoreController extends AdminController
 
             // 绑定平台
             $actions->add(new Platform);
+
+            // 添加图集
+            $actions->add(new Album);
         });
 
         return $grid;

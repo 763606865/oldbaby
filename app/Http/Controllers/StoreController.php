@@ -19,4 +19,11 @@ class StoreController extends Controller
             'stores' => $stores,
         ]]);
     }
+
+    public function detail($store_id)
+    {
+        $store = StoreService::getInstance()->detail($store_id);
+
+        return response()->json(['error' => false, 'data' => $store]);
+    }
 }

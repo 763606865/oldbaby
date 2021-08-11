@@ -16,4 +16,5 @@ Route::group([
     $router->resource('stores', StoreController::class);
     $router->resource('tags', TagController::class);
     $router->resource('platforms', PlatformController::class);
+    $router->resource('store_albums', StoreAlbumController::class);
 });
